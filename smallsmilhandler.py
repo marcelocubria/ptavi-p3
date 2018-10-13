@@ -9,8 +9,8 @@ class SmallSMILHandler(ContentHandler):
 
     def __init__(self):
         self.tag_list = []
-        self.rootlayout = ["width", "height"]
-        self.region = ["id", "top", "bottom", "left," "right"]
+        self.rootlayout = ["width", "height", "background-color"]
+        self.region = ["id", "top", "bottom", "left", "right"]
         self.img = ["src", "region", "begin", "dur"]
         self.audio = ["src", "begin", "dur"]
         self.textstream = ["src", "region"]
@@ -24,7 +24,11 @@ class SmallSMILHandler(ContentHandler):
             self.tag_list.append(name)
             for atributo in self.tags[name]:
                 self.tag_list.append(atributo)
-                self.tag_list.append(attrs.get(atributo, ""))
+                if attrs.get(atributo, "") != "":
+                    self.tag_list.append(attrs.get(atributo, ""))
+                else:
+                    self.tag_list.append("atributo vacio")
+            self.tag_list.append("")
 
     def get_tags(self):
             for tag in self.tag_list:
@@ -32,7 +36,7 @@ class SmallSMILHandler(ContentHandler):
 
 
 parser = make_parser()
-cHandler = SmallSMILHandler()
-parser.setContentHandler(cHandler)
+SMILHandler = SmallSMILHandler()
+parser.setContentHandler(SMILHandler)
 parser.parse(open('karaoke.smil'))
-print(cHandler.tag_list)
+SMILHandler.get_tags()
