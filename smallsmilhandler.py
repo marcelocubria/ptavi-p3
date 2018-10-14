@@ -28,15 +28,13 @@ class SmallSMILHandler(ContentHandler):
                     self.tag_list.append(attrs.get(atributo, ""))
                 else:
                     self.tag_list.append("atributo vacio")
-            self.tag_list.append("")
 
     def get_tags(self):
-            for tag in self.tag_list:
-                print(tag)
+        return self.tag_list
 
-
-parser = make_parser()
-SMILHandler = SmallSMILHandler()
-parser.setContentHandler(SMILHandler)
-parser.parse(open('karaoke.smil'))
-SMILHandler.get_tags()
+if __name__ == "__main__":
+    parser = make_parser()
+    SMILHandler = SmallSMILHandler()
+    parser.setContentHandler(SMILHandler)
+    parser.parse(open('karaoke.smil'))
+    print(SMILHandler.get_tags())
