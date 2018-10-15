@@ -32,6 +32,7 @@ class SmallSMILHandler(ContentHandler):
     def get_tags(self):
         return self.tag_list
 
+
 if __name__ == "__main__":
     parser = make_parser()
     SMILHandler = SmallSMILHandler()
